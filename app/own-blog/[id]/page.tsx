@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, use } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/auth-context";
 import { getSingleBlog } from "@/lib/api";
@@ -20,7 +20,7 @@ interface Blog {
 export default function SingleBlogPage({ params }: { params: { id: string } }) {
   const { accessToken, isAuthenticated, loading: authLoading } = useAuth();
   const router = useRouter();
-  const id = use(params).id;
+  const id = params.id;
 
   const objectIdRegex = /^[0-9a-fA-F]{24}$/;
   if (!objectIdRegex.test(id)) {
