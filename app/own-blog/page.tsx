@@ -23,34 +23,14 @@ export default function OwnBlogPage() {
   const [error, setError] = useState<string | null>(null);
 
   const fetchBlogs = useCallback(async () => {
-    setFetchLoading(true);
-    setError(null);
-    const { data, error } = await getMyBlogs(accessToken!);
-    if (data) {
-      setBlogs(data);
-    } else {
-      setError(error || "Failed to fetch blogs.");
-    }
-    setFetchLoading(false);
-  }, [accessToken]);
+    };, [accessToken]);
 
   useEffect(() => {
     if (isAuthenticated && accessToken) {
       fetchBlogs();
     }
   }, [isAuthenticated, accessToken, fetchBlogs]);
-    setFetchLoading(true);
-    setError(null);
-    const { data, error } = await getMyBlogs(accessToken!);
-    if (data) {
-      setBlogs(data);
-    } else {
-      setError(error || "Failed to fetch blogs.");
-    }
-    setFetchLoading(false);
-  };
-
-  const handleDelete = async (id: number) => {
+    const handleDelete = async (id: number) => {
     if (confirm("Are you sure you want to delete this blog?")) {
       const { error } = await deleteBlog(id, accessToken!);
       if (!error) {
