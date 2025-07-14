@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useAuth } from "@/components/auth/auth-context";
 import { getMyBlogs, deleteBlog } from "@/lib/api";
 import { ProtectedRoute } from "@/components/auth/protected-route";
@@ -22,13 +22,23 @@ export default function OwnBlogPage() {
   const [fetchLoading, setFetchLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const fetchBlogs = useCallback(async () => {
+    setFetchLoading(true);
+    setError(null);
+    const { data, error } = await getMyBlogs(accessToken!);
+    if (data) {
+      setBlogs(data);
+    } else {
+      setError(error || "Failed to fetch blogs.");
+    }
+    setFetchLoading(false);
+  }, [accessToken]);
+
   useEffect(() => {
     if (isAuthenticated && accessToken) {
       fetchBlogs();
     }
-  }, [isAuthenticated, accessToken]);
-
-  const fetchBlogs = async () => {
+  }, [isAuthenticated, accessToken, fetchBlogs]);
     setFetchLoading(true);
     setError(null);
     const { data, error } = await getMyBlogs(accessToken!);
@@ -83,37 +93,7 @@ export default function OwnBlogPage() {
                 <Card key={blog.id} className="flex flex-col">
                   <CardHeader>
                     <CardTitle>{blog.title}</CardTitle>
-                    <Card key={blog.id} className="flex flex-col">
-                  <CardHeader>
-                    <CardTitle>{blog.title}</CardTitle>
-                    <CardDescription className="line-clamp-3">
-                      {blog.body}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex-grow">
-                    <div className="flex flex-wrap gap-2">
-                      {blog.tags.map((tag) => (
-                        <span
-                          key={tag.id}
-                          className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10"
-                        >
-                          {tag.name}
-                        </span>
-                      ))}
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-between">
-                    <Link href={`/own-blog/${blog.id}`}>
-                      <Button variant="outline">Read More</Button>
-                    </Link>
-                    <Link href={`/own-blog/edit/${blog.id}`}>
-                      <Button variant="outline">Edit</Button>
-                    </Link>
-                    <Button variant="destructive" onClick={() => handleDelete(blog.id)}>
-                      Delete
-                    </Button>
-                  </CardFooter>
-                </Card>
+                    
                   </CardHeader>
                   <CardContent className="flex-grow">
                     <div className="flex flex-wrap gap-2">

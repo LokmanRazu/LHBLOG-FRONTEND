@@ -32,7 +32,7 @@ export default function About() {
               Lokman Hossain
             </h1>
             <p className="text-sm text-gray-500 sm:text-xl">
-              I'm a backend-focused full-stack developer with a passion for building scalable, high-performance applications. I specialize in Node.js, NestJS, and microservices architecture.
+              I&apos;m a backend-focused full-stack developer with a passion for building scalable, high-performance applications. I specialize in Node.js, NestJS, and microservices architecture.
             </p>
             {/* Buttons */}
             <div className="mt-4 flex flex-col gap-4 font-semibold sm:flex-row">
