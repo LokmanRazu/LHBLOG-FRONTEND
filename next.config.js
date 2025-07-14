@@ -5,7 +5,7 @@ const withVercelToolbar = require('@vercel/toolbar/plugins/next')();
 
 const nextConfig = {
   reactStrictMode: true,
-  trailingSlash: true
+  trailingSlash: true,
 };
 
 module.exports = withVercelToolbar(withContentlayer(nextConfig))

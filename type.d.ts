@@ -10,4 +10,4 @@ export interface AuthorType {
     twitter?: string;
     linkedin?: string;
   }
-}
+};

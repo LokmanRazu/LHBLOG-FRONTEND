@@ -25,7 +25,7 @@ Sint amet deserunt commodo aute consectetur Lorem qui aliqua tempor nulla. Velit
 * Tempor id magna eu veniam sint et mollit magna laboris reprehenderit Lorem proident. 
 * Laborum id sint ex magna nulla est labore non. 
 * Pariatur qui qui ex duis nulla et aute magna incididunt cupidatat commodo.
-* Sint amet deserunt commodo aute consectetur.
+* Sint amet deserunt commodo aute sconsectetur.
 
 Aliquip veniam aliquip nisi non amet pariatur quis. Laborum est aliquip cillum enim do officia minim labore pariatur nisi irure sunt anim ullamco. Mollit ullamco sint qui enim non Lorem aliquip nulla sint. Aute laborum tempor adipisicing officia magna fugiat sint cupidatat. Enim Lorem officia anim cillum ea tempor dolore voluptate.
 

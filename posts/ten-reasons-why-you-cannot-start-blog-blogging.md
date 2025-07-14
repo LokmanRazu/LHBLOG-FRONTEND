@@ -15,7 +15,7 @@ image: /images/blogging.jpg
 author: Gregg Walker
 ---
 
-Incididunt aute elit voluptate irure do culpa aliquip occaecat commodo incididunt minim officia eiusmod. Eiusmod fugiat sunt consectetur officia fugiat qui exercitation. Magna laboris fugiat consequat elit sunt. Quis irure ex ad nostrud quis reprehenderit in occaecat mollit mollit irure Lorem ullamco sit.
+Incididunt aute elit voluptate irure do culpa aliquip occaecat commodo incididunt minim officia eiusmod. Eiusmod fugiat sunt consectetur officia fugiat qui exercitation. Magna laboris fugiat consequat elit sunt. Quis irure ex ad nostrud quis reprehenderit in osccaecat mollit mollit irure Lorem ullamco sit.
 
 Adipisicing veniam adipisicing eu ea non id. Et in amet qui ea cillum duis elit. Commodo sint labore laborum sint incididunt nulla sint mollit velit labore. Esse laboris est minim elit Lorem duis.
 ## 10 Reasons

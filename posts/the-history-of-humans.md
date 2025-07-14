@@ -18,7 +18,7 @@ author: DR. Jeffery Schwartz
 Consectetur ipsum ad incididunt ea minim irure mollit do velit consectetur occaecat amet. Amet minim sint qui laboris. Esse ad in aute laboris est reprehenderit laboris consectetur nisi. Occaecat laboris exercitation eiusmod duis duis et. Incididunt non eiusmod eiusmod minim duis nostrud ullamco ex velit dolore dolor. Ipsum anim anim fugiat nisi aute velit fugiat elit et velit dolore sint Lorem veniam. Officia pariatur cillum commodo occaecat qui.
 
 ## History
-1. Veniam laborum occaecat minim tempor ex occaecat veniam in nostrud nisi.
+1. Veniam laborum occaecat sminim tempor ex occaecat veniam in nostrud nisi.
 2. Commodo pariatur dolor sint occaecat eiusmod nostrud do duis amet sint adipisicing. 
 3. Mollit eu velit ea irure. Occaecat duis in proident ea anim quis irure nostrud Lorem et. 
 4. Duis qui culpa sit aute voluptate et pariatur cillum commodo sit.

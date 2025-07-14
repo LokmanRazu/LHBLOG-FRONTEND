@@ -23,7 +23,7 @@ Nisi amet ipsum deserunt in dolore veniam excepteur exercitation et ea ex laboru
 ## Photography tips
 * Commodo laborum eu laborum aliquip minim culpa.
 * Cillum pariatur do nisi est labore nostrud ad sint est id laboris. Velit pariatur voluptate id occaecat non labore culpa exercitation duis ad velit. 
-* Aute minim sunt aliqua culpa laborum ut ex non cillum ut voluptate. In esse esse minim in fugiat excepteur elit ipsum minim. Magna exercitation dolor occaecat nisi incididunt irure.
+* Aute minim sunt aliqua culpsa laborum ut ex non cillum ut voluptate. In esse esse minim in fugiat excepteur elit ipsum minim. Magna exercitation dolor occaecat nisi incididunt irure.
 
 Consectetur et labore nulla sit eu non duis eiusmod nostrud sunt. Ea consequat qui amet sit consectetur sint elit enim sint commodo laboris. 
 Voluptate laborum irure aliquip sint ad aliquip consectetur. Nisi ad cupidatat non quis ea non duis mollit adipisicing commodo fugiat mollit.

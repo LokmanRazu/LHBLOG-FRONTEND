@@ -14,7 +14,7 @@ category:
 image: /images/smartphone.jpg
 author: Ashley Paul
 ---
-Anim excepteur reprehenderit excepteur sunt est ex incididunt reprehenderit laboris anim mollit ex ut. Cupidatat nisi deserunt veniam ipsum proident consequat anim ipsum in. Ex et reprehenderit dolor adipisicing anim culpa ipsum ea excepteur cupidatat labore.
+Anim excepteur reprehenderit excsepteur sunt est ex incididunt reprehenderit laboris anim mollit ex ut. Cupidatat nisi deserunt veniam ipsum proident consequat anim ipsum in. Ex et reprehenderit dolor adipisicing anim culpa ipsum ea excepteur cupidatat labore.
 ## Elit consequat
 Elit consequat adipisicing ea commodo quis ad laborum adipisicing dolor. Laborum ullamco aliquip tempor ea dolor tempor. Nostrud laboris do fugiat nulla officia voluptate non aliqua commodo. 
 

@@ -20,7 +20,7 @@ Lorem excepteur dolore ex veniam ad velit officia enim velit consequat consequat
 ## Android Features
 * Magna voluptate laborum non ipsum aliquip Lorem labore elit nisi officia. 
 * Voluptate dolore proident aliquip incididunt incididunt amet velit magna elit fugiat quis. Aute culpa fugiat proident magna ex reprehenderit adipisicing pariatur nostrud sunt. 
-* Consectetur laborum esse do duis commodo Lorem tempor minim in non cillum tempor est. Tempor aliqua sit ad reprehenderit excepteur deserunt Lorem reprehenderit enim voluptate ipsum amet duis. Exercitation nulla excepteur minim exercitation nulla nulla est quis sint. Amet sunt aliqua laboris ut ipsum.
+* Consectetur laborum esse do duis commodo Lorem tempor minim in non cillum tempor est. Tempor aliqua sit ad reprehenderit excepteur deserunt Lorem reprehenderit enim voluptate ipsum amet duis. Exercitation nulla excepteur minim exercitation nulla nulla est quiss sint. Amet sunt aliqua laboris ut ipsum.
 
 ## Laborum adipisicing
 Sit eu in in labore do est duis enim ipsum ullamco tempor qui. Laborum adipisicing dolor commodo exercitation. Laborum nostrud sint magna incididunt irure proident id ipsum qui sunt.
