@@ -83,7 +83,9 @@ export default function OwnBlogPage() {
                 <Card key={blog.id} className="flex flex-col">
                   <CardHeader>
                     <CardTitle>{blog.title}</CardTitle>
-                    
+                    <CardDescription className="line-clamp-3">
+                      {blog.body}
+                    </CardDescription>
                   </CardHeader>
                   <CardContent className="flex-grow">
                     <div className="flex flex-wrap gap-2">
@@ -98,6 +100,9 @@ export default function OwnBlogPage() {
                     </div>
                   </CardContent>
                   <CardFooter className="flex justify-between">
+                    <Link href={`/own-blog/${blog.id}`}>
+                      <Button variant="outline">Read More</Button>
+                    </Link>
                     <Link href={`/own-blog/edit/${blog.id}`}>
                       <Button variant="outline">Edit</Button>
                     </Link>
