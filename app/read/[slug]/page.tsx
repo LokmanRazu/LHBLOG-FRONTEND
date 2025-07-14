@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import { allPosts } from 'contentlayer/generated';
 import _ from 'lodash';

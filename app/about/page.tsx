@@ -1,4 +1,6 @@
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import React from 'react'
+import Image from 'next/image'
 import { Mail, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -23,22 +25,29 @@ export default function About() {
               <p className="text-sm">Available for work</p>
             </div>
             <p className="text-sm text-gray-500 sm:text-xl">
-              Developer &amp; UX Specialist
+              Backend Focused Fullstack Developer
             </p>
             {/* Title */}
             <h1 className="mb-6 text-4xl font-bold md:text-6xl lg:mb-8">
-              Jonathan Smith
+              Lokman Hossain
             </h1>
             <p className="text-sm text-gray-500 sm:text-xl">
-              Consectetur adipiscing elit duis tristique sollicitudin nibh.
-              Augue mauris augue neque gravida in fermentum. Sapien pellentesque
-              habitant morbi tristique pellentesque.
+              I'm a backend-focused full-stack developer with a passion for building scalable, high-performance applications. I specialize in Node.js, NestJS, and microservices architecture.
             </p>
             {/* Buttons */}
             <div className="mt-4 flex flex-col gap-4 font-semibold sm:flex-row">
-              <Button>
-                <Mail /> Email Me
-              </Button>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button>
+                      <Mail /> Email Me
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>lhrazu.dev@gmail.com</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
 
               <Button variant="outline">
                 <FileText /> Resume
@@ -46,7 +55,13 @@ export default function About() {
             </div>
           </div>
           {/* Image */}
-          <div className="min-h-[530px] overflow-hidden rounded-md bg-gray-100"></div>
+          <Image
+            src="/images/img1.jpeg"
+            alt="Lokman Hossain"
+            width={500}
+            height={500}
+            className="min-h-[530px] overflow-hidden rounded-md bg-gray-100 object-cover"
+          />
         </div>
       </div>
     </section>)

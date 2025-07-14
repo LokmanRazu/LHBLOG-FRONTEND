@@ -30,7 +30,7 @@
         "./.contentlayer/generated",
         ".contentlayer/generated"
       ],
-      "@/lib/": [
+      "@/lib/*": [
         "./lib/*"
       ],
       "@/type": [

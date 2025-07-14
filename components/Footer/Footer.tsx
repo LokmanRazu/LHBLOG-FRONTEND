@@ -24,7 +24,7 @@ export function Footer() {
 
           <Link href="/" className="mb-5 flex items-center">
             <Button variant="link" className="[&_svg]:size-8 stroke">
-              <Sparkles size={30} strokeWidth={1.2} /> <span className="self-center text-2xl font-semibold whitespace-nowrap">Minimalist</span>
+              <Sparkles size={30} strokeWidth={1.2} /> <span className="self-center text-2xl font-semibold whitespace-nowrap">lhBlog</span>
             </Button>
           </Link>
 
@@ -75,7 +75,7 @@ export function Footer() {
             <Button variant="link"> <Github /> </Button>
           </div>
           <p className="text-sm sm:text-base">
-            © Copyright 2021. All rights reserved.
+            © Copyright 2025. All rights reserved by Lokman Hossain Razu.
           </p>
         </div>
       </div>

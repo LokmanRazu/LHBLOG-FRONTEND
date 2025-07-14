@@ -4,10 +4,11 @@ import { VercelToolbar } from '@vercel/toolbar/next';
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
 import { ThemeProvider } from "@/components/theme/theme-provider"
+import { AuthProvider } from "@/components/auth/auth-context";
 
 export const metadata: Metadata = {
-  title: 'Home | Minimalist',
-  description: 'Minimalist is template for blog built with nextjs, shadcn ui and tailwind css.',
+  title: 'Home | lhBlog',
+  description: 'lhBlog is template for blog built with nextjs, shadcn ui and tailwind css.',
 }
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
@@ -17,12 +18,14 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="en">
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
-          <Header />
-          {children}
-          {shouldInjectToolbar && <VercelToolbar />}
-          <Footer />
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
+            <Header />
+            {children}
+            {shouldInjectToolbar && <VercelToolbar />}
+            <Footer />
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

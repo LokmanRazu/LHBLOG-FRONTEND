@@ -5,11 +5,14 @@ import Link from "next/link"
 import { cn } from "lib/utils"
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button"
-import { Lock, Search } from "lucide-react"
+import { Lock, Search, LogOut } from "lucide-react"
 import { ThemeToggle } from "@/components/theme/theme-toggle"
 import { Sparkles } from 'lucide-react';
+import { useAuth } from "@/components/auth/auth-context";
 
 export function Header() {
+  const { isAuthenticated, logout } = useAuth();
+
   return (
     <header className="px-2 py-3 sm:px-4 w-full border-b border-border">
 
@@ -17,7 +20,7 @@ export function Header() {
 
         <Link href="/" className="flex items-center">
           <Button variant="link" className="[&_svg]:size-8 stroke">
-            <Sparkles size={30} strokeWidth={1.2} /> <span className="self-center text-2xl font-semibold whitespace-nowrap">Minimalist</span>
+            <Sparkles size={30} strokeWidth={1.2} /> <span className="self-center text-2xl font-semibold whitespace-nowrap">lhBlog</span>
           </Button>
         </Link>
 
@@ -48,6 +51,16 @@ export function Header() {
               </Link>
             </NavigationMenuItem>
 
+            {isAuthenticated && (
+              <NavigationMenuItem>
+                <Link href="/own-blog" legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Own Blog
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            )}
+
           </NavigationMenuList>
         </NavigationMenu>
 
@@ -55,7 +68,13 @@ export function Header() {
           <Link href={"/search"}>
             <Button variant="link"> <Search /> </Button>
           </Link>
-          <Button variant="link"> <Lock /> Login </Button>
+          {isAuthenticated ? (
+            <Button variant="link" onClick={logout}> <LogOut /> Logout </Button>
+          ) : (
+            <Link href={"/auth/signin"}>
+              <Button variant="link"> <Lock /> Login </Button>
+            </Link>
+          )}
           <ThemeToggle />
         </div>
       </div>

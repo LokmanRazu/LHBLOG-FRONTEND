@@ -17,9 +17,7 @@ export default function Page() {
             Blog Posts
           </h2>
           <p className="mb-8 text-muted-foreground md:text-base lg:max-w-2xl lg:text-lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Elig
-            doloremque mollitia fugiat omnis! Porro facilis quo animi
-            consequatur.
+            Please, Login first to CREATE your OWN BLOG and enjoy!!
           </p>
         </div>
 
