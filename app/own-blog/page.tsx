@@ -88,16 +88,6 @@ export default function OwnBlogPage() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="flex-grow">
-                    <div className="flex flex-wrap gap-2">
-                      {blog.tags.map((tag, index) => (
-                        <span
-                          key={`${tag.id}-${index}`}
-                          className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10"
-                        >
-                          {tag.name}
-                        </span>
-                      ))}
-                    </div>
                   </CardContent>
                   <CardFooter className="flex justify-between">
                     <Link href={`/own-blog/${blog.id}`}>

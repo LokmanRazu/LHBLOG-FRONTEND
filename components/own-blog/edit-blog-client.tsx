@@ -145,21 +145,7 @@ export default function EditBlogClient({ id }: EditBlogClientProps) {
                   rows={10}
                 />
               </div>
-              <div>
-                <Label>Tags</Label>
-                <div className="grid grid-cols-2 gap-2 mt-2">
-                  {tags.map((tag) => (
-                    <div key={tag.id} className="flex items-center space-x-1">
-                      <Checkbox
-                        id={`tag-${tag.id}`}
-                        checked={selectedTagIds.includes(tag.id)}
-                        disabled
-                      />
-                      <Label htmlFor={`tag-${tag.id}`} className="text-sm">{tag.name}</Label>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              
               {error && <p className="text-red-500 text-sm">{error}</p>}
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? "Updating..." : "Update Blog"}

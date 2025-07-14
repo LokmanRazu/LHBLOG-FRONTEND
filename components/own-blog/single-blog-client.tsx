@@ -80,16 +80,6 @@ export default function SingleBlogClient({ id }: SingleBlogClientProps) {
             <div className="mb-8 text-muted-foreground md:text-base lg:max-w-2xl lg:text-lg text-left">
               {blog.body}
             </div>
-            <div className="flex flex-wrap gap-2 justify-center mb-8">
-              {blog.tags.map((tag, index) => (
-                <span
-                  key={`${tag.id}-${index}`}
-                  className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10"
-                >
-                  {tag.name}
-                </span>
-              ))}
-            </div>
             <Link href="/own-blog">
               <Button>Back to My Blogs</Button>
             </Link>
