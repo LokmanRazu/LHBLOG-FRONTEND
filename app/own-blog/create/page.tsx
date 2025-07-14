@@ -28,9 +28,9 @@ export default function CreateBlogPage() {
 
   useEffect(() => {
     const fetchTags = async () => {
-      const { data: tagsData, error } = await getAllTags();
-      if (tagsData) {
-        setTags(tagsData || []);
+      const { data: fetchedTags, error } = await getAllTags();
+      if (fetchedTags) {
+        setTags(fetchedTags || []);
       } else {
         console.error("Failed to fetch tags:", error);
       }
