@@ -23,14 +23,24 @@ export default function OwnBlogPage() {
   const [error, setError] = useState<string | null>(null);
 
   const fetchBlogs = useCallback(async () => {
-    };, [accessToken]);
+    setFetchLoading(true);
+    setError(null);
+    const { data, error } = await getMyBlogs(accessToken!);
+    if (data) {
+      setBlogs(data);
+    } else {
+      setError(error || "Failed to fetch blogs.");
+    }
+    setFetchLoading(false);
+  }, [accessToken]);
 
   useEffect(() => {
     if (isAuthenticated && accessToken) {
       fetchBlogs();
     }
   }, [isAuthenticated, accessToken, fetchBlogs]);
-    const handleDelete = async (id: number) => {
+
+  const handleDelete = useCallback(async (id: number) => {
     if (confirm("Are you sure you want to delete this blog?")) {
       const { error } = await deleteBlog(id, accessToken!);
       if (!error) {
@@ -39,7 +49,7 @@ export default function OwnBlogPage() {
         setError(error || "Failed to delete blog.");
       }
     }
-  };
+  }, [accessToken, fetchBlogs]);
 
   if (loading || fetchLoading) {
     return <div className="flex justify-center items-center h-screen">Loading blogs...</div>;
