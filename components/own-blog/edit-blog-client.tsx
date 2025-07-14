@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/auth-context";
 import { getSingleBlog, updateBlog, getAllTags, addTagToBlog, removeTagFromBlog } from "@/lib/api";
@@ -83,27 +83,7 @@ export default function EditBlogClient({ id }: EditBlogClientProps) {
     }
   }, [blogId, accessToken, isAuthenticated, authLoading]);
 
-  const handleTagChange = async (tagId: number, isChecked: boolean) => {
-    if (!accessToken) return;
-
-    if (isChecked) {
-      // Add tag
-      const { error } = await addTagToBlog(blogId, tagId, accessToken);
-      if (!error) {
-        setSelectedTagIds((prev) => [...prev, tagId]);
-      } else {
-        setError(error || "Failed to add tag.");
-      }
-    } else {
-      // Remove tag
-      const { error } = await removeTagFromBlog(blogId, tagId, accessToken);
-      if (!error) {
-        setSelectedTagIds((prev) => prev.filter((id) => id !== tagId));
-      } else {
-        setError(error || "Failed to remove tag.");
-      }
-    }
-  };
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -173,9 +153,7 @@ export default function EditBlogClient({ id }: EditBlogClientProps) {
                       <Checkbox
                         id={`tag-${tag.id}`}
                         checked={selectedTagIds.includes(tag.id)}
-                        onCheckedChange={(checked) =>
-                          handleTagChange(tag.id, checked as boolean)
-                        }
+                        disabled
                       />
                       <Label htmlFor={`tag-${tag.id}`} className="text-sm">{tag.name}</Label>
                     </div>
