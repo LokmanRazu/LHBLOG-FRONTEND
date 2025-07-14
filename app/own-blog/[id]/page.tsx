@@ -17,7 +17,11 @@ interface Blog {
   tags: { id: number; name: string }[];
 }
 
-export default function SingleBlogPage({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: { id: string };
+}
+
+export default function SingleBlogPage({ params }: PageProps) {
   const { accessToken, isAuthenticated, loading: authLoading } = useAuth();
   const router = useRouter();
   const id = params.id;
