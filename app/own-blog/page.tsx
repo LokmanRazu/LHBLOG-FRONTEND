@@ -2,34 +2,29 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useAuth } from "@/components/auth/auth-context";
-import { getMyBlogs, deleteBlog } from "@/lib/api";
+import { getMyBlogs, deleteBlog, BlogResponseDto } from "@/lib/api";
+import { ApiResponse } from "@/lib/api";
 import { ProtectedRoute } from "@/components/auth/protected-route";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
-interface Blog {
-  id: number;
-  title: string;
-  body: string;
-  userId: number;
-  tags: { id: number; name: string }[];
-}
+
 
 export default function OwnBlogPage() {
   const { accessToken, isAuthenticated, loading } = useAuth();
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [blogs, setBlogs] = useState<BlogResponseDto[]>([]);
   const [fetchLoading, setFetchLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchBlogs = useCallback(async () => {
     setFetchLoading(true);
     setError(null);
-    const { data, error } = await getMyBlogs(accessToken!);
-    if (data) {
-      setBlogs(data);
+    const blogsResult: ApiResponse<BlogResponseDto[]> = await getMyBlogs(accessToken!);
+    if (blogsResult.data) {
+      setBlogs(blogsResult.data);
     } else {
-      setError(error || "Failed to fetch blogs.");
+      setError(blogsResult.error || "Failed to fetch blogs.");
     }
     setFetchLoading(false);
   }, [accessToken]);
@@ -40,7 +35,7 @@ export default function OwnBlogPage() {
     }
   }, [isAuthenticated, accessToken, fetchBlogs]);
 
-  const handleDelete = useCallback(async (id: number) => {
+  const handleDelete = useCallback(async (id: string) => {
     if (confirm("Are you sure you want to delete this blog?")) {
       const { error } = await deleteBlog(id, accessToken!);
       if (!error) {

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/auth-context";
 import { createBlog, getAllTags } from "@/lib/api";
+import { ApiResponse, TagResponseDto } from "@/lib/api";
 import { ProtectedRoute } from "@/components/auth/protected-route";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,34 +12,31 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 
-interface Tag {
-  id: number;
-  name: string;
-}
+
 
 export default function CreateBlogPage() {
   const { accessToken, isAuthenticated, loading: authLoading } = useAuth();
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [tags, setTags] = useState<Tag[]>([]);
-  const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
+  const [tags, setTags] = useState<TagResponseDto[]>([]);
+  const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchTags = async () => {
-      const result = await getAllTags();
+      const result: ApiResponse<TagResponseDto[]> = await getAllTags();
       if (result.data) {
-        setTags(result.data || []);
+        setTags(result.data);
       } else {
-        console.error("Failed to fetch tags:", error);
+        console.error("Failed to fetch tags:", result.error);
       }
     };
     fetchTags();
   }, []);
 
-  const handleTagChange = (tagId: number) => {
+  const handleTagChange = (tagId: string) => {
     setSelectedTagIds((prev) =>
       prev.includes(tagId) ? prev.filter((id) => id !== tagId) : [...prev, tagId]
     );

@@ -1,8 +1,76 @@
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://maac-blog.onrender.com";
 
-interface ApiResponse<T> {
+export interface ApiResponse<T> {
   data?: T;
   error?: string;
+}
+
+// DTO Interfaces
+
+export interface UserResponseDto {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface LoginResponseDto {
+  accessToken: string;
+}
+
+export interface BlogResponseDto {
+  id: string;
+  title: string;
+  body: string;
+  userId: string;
+  user: { id: string; name: string; email: string };
+  tags: { id: string; name: string }[];
+}
+
+export interface TagResponseDto {
+  id: string;
+  name: string;
+}
+
+export interface CommentResponseDto {
+  body: string;
+  blogId: string;
+  id: string;
+  user: { id: number; name: string };
+}
+
+export interface LoginRequestDto {
+  email: string;
+  password: string;
+}
+
+export interface UserRequestDto {
+  name: string;
+  email: string;
+  password: string;
+  role: "user" | "admin";
+}
+
+export interface UserUpdateRequestDto {
+  name: string;
+}
+
+export interface BlogRequestDto {
+  title: string;
+  body: string;
+  tagIds: string[];
+}
+
+export interface UpdateBlogRequestDto {
+  title: string;
+  body: string;
+}
+
+export interface AddBlogTag {
+  tagId: string;
+}
+
+export interface CommentRequestDto {
+  body: string;
 }
 
 async function fetcher<T>(
@@ -28,60 +96,77 @@ async function fetcher<T>(
 
     if (!response.ok) {
       const errorText = await response.text();
-      return { error: errorText || response.statusText };
+      return { data: undefined, error: errorText || response.statusText };
     }
 
-    // Handle cases where the response might be plain text or empty
-    const contentType = response.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
-      const data: T = await response.json();
-      return { data };
-    } else {
-      const data: any = await response.text(); // Treat as text if not JSON
-      return { data };
+    const text = await response.text();
+
+    if (response.status === 204 || text === '') {
+        return { data: "Operation successful" as any };
+    }
+
+    try {
+      return { data: JSON.parse(text) as T };
+    } catch (e) {
+      return { data: text as any };
     }
   } catch (error: any) {
-    return { error: error.message || "An unexpected error occurred" };
+    return { data: undefined, error: error.message || "An unexpected error occurred" };
   }
 }
 
 // Auth Endpoints
-export const signInUser = async (credentials: any) =>
-  fetcher("/auth/signin", "POST", credentials);
-export const signUpUser = async (userData: any) =>
-  fetcher("/auth/signup", "POST", userData);
+export const signInUser = async (credentials: LoginRequestDto) =>
+  fetcher<LoginResponseDto>("/auth/signin", "POST", credentials);
+export const signUpUser = async (userData: UserRequestDto) =>
+  fetcher<string>("/auth/signup", "POST", userData);
 
 // User Endpoints
 export const getMyProfile = async (token: string) =>
-  fetcher("/users/me", "GET", undefined, token);
+  fetcher<UserResponseDto>("/users/me", "GET", undefined, token);
 export const updateMyProfile = async (name: string, token: string) =>
-  fetcher("/users/update-profile", "PUT", { name }, token);
+  fetcher<UserResponseDto>("/users/update-profile", "PUT", { name }, token);
 
 // Blog Endpoints
 export const getMyBlogs = async (token: string) =>
-  fetcher("/blogs", "GET", undefined, token);
-export const getSingleBlog = async (id: number, token: string) =>
-  fetcher(`/blogs/${id}`, "GET", undefined, token);
-export const createBlog = async (blogData: any, token: string) =>
-  fetcher("/blogs", "POST", blogData, token);
-export const updateBlog = async (id: number, blogData: any, token: string) =>
-  fetcher(`/blogs/${id}`, "PUT", blogData, token);
-export const deleteBlog = async (id: number, token: string) =>
-  fetcher(`/blogs/${id}`, "DELETE", undefined, token);
-export const addTagToBlog = async (blogId: number, tagId: number, token: string) =>
-  fetcher(`/blogs/${blogId}/add-tag`, "PUT", { tagId }, token);
-export const removeTagFromBlog = async (blogId: number, tagId: number, token: string) =>
-  fetcher(`/blogs/${blogId}/delete-tag/${tagId}`, "DELETE", undefined, token);
+  fetcher<BlogResponseDto[]>("/blogs", "GET", undefined, token);
+export const getSingleBlog = async (id: string, token: string) =>
+  fetcher<BlogResponseDto>(`/blogs/${id}`, "GET", undefined, token);
+export const createBlog = async (blogData: BlogRequestDto, token: string) =>
+  fetcher<BlogResponseDto>(`/blogs`, "POST", blogData, token);
+export const updateBlog = async (id: string, blogData: UpdateBlogRequestDto, token: string) =>
+  fetcher<string>(`/blogs/${id}`, "PUT", blogData, token);
+export const deleteBlog = async (id: string, token: string) =>
+  fetcher<string>(`/blogs/${id}`, "DELETE", undefined, token);
+export const addTagToBlog = async (blogId: string, tagId: string, token: string) =>
+  fetcher<string>(`/blogs/${blogId}/add-tag`, "PUT", { tagId }, token);
+export const removeTagFromBlog = async (blogId: string, tagId: string, token: string) =>
+  fetcher<string>(`/blogs/${blogId}/delete-tag/${tagId}`, "DELETE", undefined, token);
 
 // Comment Endpoints
-export const getCommentsForBlog = async (blogId: number, token: string) =>
-  fetcher(`/blogs/${blogId}/comments`, "GET", undefined, token);
-export const addCommentToBlog = async (blogId: number, commentBody: string, token: string) =>
-  fetcher(`/blogs/${blogId}/comments`, "POST", { body: commentBody }, token);
-export const deleteComment = async (blogId: number, commentId: number, token: string) =>
-  fetcher(`/blogs/${blogId}/comments/${commentId}`, "DELETE", undefined, token);
+export const getCommentsForBlog = async (blogId: string, token: string) =>
+  fetcher<CommentResponseDto[]>(`/blogs/${blogId}/comments`, "GET", undefined, token);
+export const addCommentToBlog = async (blogId: string, commentBody: string, token: string) =>
+  fetcher<CommentResponseDto>(`/blogs/${blogId}/comments`, "POST", { body: commentBody }, token);
+export const deleteComment = async (blogId: string, commentId: string, token: string) =>
+  fetcher<string>(`/blogs/${blogId}/comments/${commentId}`, "DELETE", undefined, token);
 
 // Tag Endpoints
-export const getAllTags = async () => fetcher("/tags", "GET");
+export const getAllTags = async (): Promise<ApiResponse<TagResponseDto[]>> => {
+  try {
+    const res = await fetch(`${BASE_URL}/tags`); // Assuming /tags is the correct endpoint
+    const data = await res.json();
+
+    return {
+      data: data, // Assuming the API returns an array of tags directly
+      error: undefined,
+    };
+  } catch (err: any) {
+    return {
+      data: undefined,
+      error: err.message || "Failed to fetch tags",
+    };
+  }
+};
 export const createTag = async (tagName: string) =>
-  fetcher("/tags", "POST", { name: tagName });
+  fetcher<TagResponseDto>("/tags", "POST", { name: tagName });

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signUpUser } from "@/lib/api";
+import { signUpUser, UserRequestDto } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -21,17 +21,17 @@ export default function SignUpPage() {
     setError(null);
     setLoading(true);
 
-    const { data, error } = await signUpUser({
+    const result = await signUpUser({
       name,
       email,
       password,
       role: "user", // Default role for signup
     });
 
-    if (data) {
+    if (result.data) {
       router.push("/auth/signin");
     } else {
-      setError(error || "Sign up failed. Please try again.");
+      setError(result.error || "Sign up failed. Please try again.");
     }
     setLoading(false);
   };

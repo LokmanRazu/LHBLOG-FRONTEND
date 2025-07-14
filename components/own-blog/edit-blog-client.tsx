@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/auth-context";
-import { getSingleBlog, updateBlog, getAllTags, addTagToBlog, removeTagFromBlog } from "@/lib/api";
+import { getSingleBlog, updateBlog, getAllTags, BlogResponseDto, TagResponseDto, UpdateBlogRequestDto } from "@/lib/api";
+import { ApiResponse } from "@/lib/api";
 import { ProtectedRoute } from "@/components/auth/protected-route";
 import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
@@ -12,17 +13,17 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 
-interface Tag {
-  id: number;
-  name: string;
-}
-
 interface Blog {
-  id: number;
+  id: string;
   title: string;
   body: string;
-  userId: number;
-  tags: { id: number; name: string }[];
+  userId: string;
+  tags: { id: string; name: string }[];
+}
+
+interface Tag {
+  id: string;
+  name: string;
 }
 
 interface EditBlogClientProps {
@@ -43,8 +44,8 @@ export default function EditBlogClient({ id }: EditBlogClientProps) {
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [tags, setTags] = useState<Tag[]>([]);
-  const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
+  const [tags, setTags] = useState<TagResponseDto[]>([]);
+  const [selectedTagIds, setSelectedTagIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -56,23 +57,23 @@ export default function EditBlogClient({ id }: EditBlogClientProps) {
       setError(null);
 
       // Fetch blog details
-      const { data: blogData, error: blogError } = await getSingleBlog(blogId, accessToken);
-      if (blogData) {
-        setTitle(blogData.title);
-        setBody(blogData.body);
-        setSelectedTagIds(blogData.tags.map((tag) => tag.id));
+      const blogResult: ApiResponse<BlogResponseDto> = await getSingleBlog(blogId, accessToken);
+      if (blogResult.data) {
+        setTitle(blogResult.data.title);
+        setBody(blogResult.data.body);
+        setSelectedTagIds(blogResult.data.tags.map((tag) => tag.id));
       } else {
-        setError(blogError || "Failed to fetch blog details.");
+        setError(blogResult.error || "Failed to fetch blog details.");
         setLoading(false);
         return;
       }
 
       // Fetch all available tags
-      const { data: allTagsData, error: allTagsError } = await getAllTags();
-      if (allTagsData) {
-        setTags(allTagsData);
+      const allTagsResult: ApiResponse<TagResponseDto[]> = await getAllTags();
+      if (allTagsResult.data) {
+        setTags(allTagsResult.data);
       } else {
-        console.error("Failed to fetch all tags:", allTagsError);
+        console.error("Failed to fetch all tags:", allTagsResult.error);
       }
 
       setLoading(false);
@@ -96,16 +97,16 @@ export default function EditBlogClient({ id }: EditBlogClientProps) {
       return;
     }
 
-    const { data, error: apiError } = await updateBlog(
+    const updateResult: ApiResponse<string> = await updateBlog(
       blogId,
       { title, body },
       accessToken
     );
 
-    if (data) {
+    if (updateResult.data) {
       router.push("/own-blog");
     } else {
-      setError(apiError || "Failed to update blog.");
+      setError(updateResult.error || "Failed to update blog.");
     }
     setLoading(false);
   };

@@ -3,18 +3,19 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/auth-context";
-import { getSingleBlog } from "@/lib/api";
+import { getSingleBlog, BlogResponseDto } from "@/lib/api";
+import { ApiResponse } from "@/lib/api";
 import { ProtectedRoute } from "@/components/auth/protected-route";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 interface Blog {
-  id: number;
+  id: string;
   title: string;
   body: string;
-  userId: number;
-  tags: { id: number; name: string }[];
+  userId: string;
+  tags: { id: string; name: string }[];
 }
 
 interface SingleBlogClientProps {
@@ -32,7 +33,7 @@ export default function SingleBlogClient({ id }: SingleBlogClientProps) {
 
   const blogId = id;
 
-  const [blog, setBlog] = useState<Blog | null>(null);
+  const [blog, setBlog] = useState<BlogResponseDto | null>(null);
   const [fetchLoading, setFetchLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -43,11 +44,11 @@ export default function SingleBlogClient({ id }: SingleBlogClientProps) {
       setFetchLoading(true);
       setError(null);
 
-      const { data, error: apiError } = await getSingleBlog(blogId, accessToken);
-      if (data) {
-        setBlog(data);
+      const blogResult: ApiResponse<BlogResponseDto> = await getSingleBlog(blogId, accessToken);
+      if (blogResult.data) {
+        setBlog(blogResult.data);
       } else {
-        setError(apiError || "Failed to fetch blog details.");
+        setError(blogResult.error || "Failed to fetch blog details.");
       }
       setFetchLoading(false);
     };
