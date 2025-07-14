@@ -89,9 +89,9 @@ export default function OwnBlogPage() {
                   </CardHeader>
                   <CardContent className="flex-grow">
                     <div className="flex flex-wrap gap-2">
-                      {blog.tags.map((tag) => (
+                      {blog.tags.map((tag, index) => (
                         <span
-                          key={tag.id}
+                          key={`${tag.id}-${index}`}
                           className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10"
                         >
                           {tag.name}

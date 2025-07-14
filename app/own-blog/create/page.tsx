@@ -30,7 +30,7 @@ export default function CreateBlogPage() {
     const fetchTags = async () => {
       const { data, error } = await getAllTags();
       if (data) {
-        setTags(data);
+        setTags(data.data || []);
       } else {
         console.error("Failed to fetch tags:", error);
       }

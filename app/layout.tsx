@@ -16,7 +16,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const shouldInjectToolbar = process.env.NODE_ENV === 'development';
   // const banner = await showBanner(); 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
